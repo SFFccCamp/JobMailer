@@ -24,6 +24,9 @@ app.get( '/test', ( req, res ) => {
 } );
 
 
+app.use( '/hackernews', require( './routes/hackerNews' ));
+
+
 app.post( '/search', ( req, res ) => {
     axios.get('https://news.ycombinator.com/item?id=16492994')
          .then( result => {
