@@ -34,6 +34,17 @@ const handleHttpChunk = ( res, array, num ) => {
     } )
 }
 
+router.get( '/search', ( req, res ) => {
+    axios.get('https://news.ycombinator.com/item?id=16492994')
+         .then( result => {
+             const $ = cheerio.load( result.data );
+            let map = []
+            $('.c00').each( ( i, el ) => map.push( { item: $(el).text() } ) )
+            res.send( map.filter( i => i.item.toLowerCase().includes('angular')) )
+         } )
+         .catch( error => console.log( error ) )
+} )
+
 
 router.get( '/search/:hnId', async ( req, res ) => {
    
