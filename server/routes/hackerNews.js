@@ -2,34 +2,16 @@ const express = require( 'express' );
 const router  = express.Router();
 const axios   = require( 'axios' );
 
-const { zip } = require( 'rxjs/Observable' );
-const { Observable } = require( 'rxjs' );
-
-
-const obsHttp = ( url ) => {
-    return Observable.create( obs => {
-            return axios.get( url )
-                        .then( result => {
-                            obs.next( result.data );
-                        } )
-                        .catch( err => console.log( err ) )
-    } );
-}
-
-
-const obs = Observable.create( obs => obs.next( 1 ) )
-
 
 const handleHttpChunk = ( res, array, num ) => {
 
     if( array.length === 0 ) return res.end();
     let subArr = array.splice( 0, 20 );
-
-    return Observable.zip.apply( null, subArr.map( kid => {
-        return obsHttp( `https://hacker-news.firebaseio.com/v0/item/${kid}.json?print=pretty`)
+    return Promise.all( subArr.map( kid  => {
+        return axios.get( `https://hacker-news.firebaseio.com/v0/item/${kid}.json?print=pretty` )
     } ) )
-    .subscribe( data => {
-        res.write( JSON.stringify( data ) )
+    .then( data => {
+        res.write( JSON.stringify( data.map( d => d.data ) ) )
         handleHttpChunk( res, array, num ++ );
     } )
 }
