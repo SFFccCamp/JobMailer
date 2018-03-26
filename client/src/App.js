@@ -4,11 +4,11 @@ import './App.css';
 
 class App extends Component {
 
-  componentDidMount() {
-    fetch( '/test' )
-      .then( res => res.json() )
-      .then( res => console.log( res ) )
-  }
+  // componentDidMount() {
+  //   fetch( '/test' )
+  //     .then( res => res.json() )
+  //     .then( res => console.log( res ) )
+  // }
 
 
   render() {
