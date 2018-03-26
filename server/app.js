@@ -6,13 +6,14 @@ const mongoose   = require('mongoose');
 const path       = require('path');
 const port       = process.env.PORT || 9000;
 const app        = express();
+const Users      = require( './models/users' );
 
 const axios = require('axios');
 const cheerio = require('cheerio');
 
 // ===== MONGOOSE ===== //
 mongoose.Promise = global.Promise;
-// mongoose.connect()
+mongoose.connect( process.env.DB_URL );
 
 
 app.use(bodyParser.json( {} ));
@@ -24,7 +25,7 @@ app.get( '/test', ( req, res ) => {
 } );
 
 
-app.use( '/hackernews', require( './routes/hackerNews' ));
+app.use( '/search', require( './routes/hackerNews' ));
 
 
 app.listen( port );
