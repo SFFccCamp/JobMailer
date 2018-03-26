@@ -1,6 +1,7 @@
 const express = require( 'express' );
 const router  = express.Router();
 const axios   = require( 'axios' );
+const cheerio = require( 'cheerio' );
 
 
 const handleHttpChunk = ( res, array, num ) => {
@@ -30,7 +31,7 @@ router.get( '/', ( req, res ) => {
 
 
 router.get( '/:hnId', async ( req, res ) => {
-   
+
     const { hnId } = req.params;
     axios.get( `https://hacker-news.firebaseio.com/v0/item/${hnId}.json?print=pretty`)
          .then( result => {
