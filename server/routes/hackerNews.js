@@ -16,10 +16,10 @@ const handleHttpChunk = ( res, array, num ) => {
     } )
 }
 
-router.get( '/search', ( req, res ) => {
+router.get( '/', ( req, res ) => {
     axios.get('https://news.ycombinator.com/item?id=16492994')
          .then( result => {
-             const $ = cheerio.load( result.data );
+            const $ = cheerio.load( result.data );
             let map = []
             $('.c00').each( ( i, el ) => map.push( { item: $(el).text() } ) )
             res.send( map.filter( i => i.item.toLowerCase().includes('angular')) )
@@ -28,7 +28,7 @@ router.get( '/search', ( req, res ) => {
 } )
 
 
-router.get( '/search/:hnId', async ( req, res ) => {
+router.get( '/:hnId', async ( req, res ) => {
    
     const { hnId } = req.params;
     axios.get( `https://hacker-news.firebaseio.com/v0/item/${hnId}.json?print=pretty`)
