@@ -4,11 +4,14 @@ import './App.css';
 
 class App extends Component {
 
-  // componentDidMount() {
-  //   fetch( '/test' )
-  //     .then( res => res.json() )
-  //     .then( res => console.log( res ) )
-  // }
+  componentDidMount() {
+    fetch( '/auth/verify', {
+      credentials: 'include'
+    } )
+      .then( res => res.json() )
+      .then( res => console.log( res ) )
+      .catch( err => console.log( err ) )
+  }
 
 
   render() {
