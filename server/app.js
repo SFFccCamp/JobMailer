@@ -18,6 +18,7 @@ mongoose.connect( process.env.DB_URL );
 
 app.use(bodyParser.json( {} ));
 app.use(bodyParser.urlencoded( { extended: true } ));
+app.use( require( './passport-config' ) );
 
 
 app.get( '/test', ( req, res ) => {
@@ -25,7 +26,8 @@ app.get( '/test', ( req, res ) => {
 } );
 
 
-app.use( '/search', require( './routes/hackerNews' ));
+app.use( '/search', require( './routes/hackerNews' ) );
+app.use( '/auth', require( './routes/authentication') );
 
 
 app.listen( port );
