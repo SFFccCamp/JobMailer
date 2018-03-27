@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 
 class Navbar extends Component {
 
@@ -20,7 +21,7 @@ class Navbar extends Component {
                 <div className="nav-wrapper nav-container ">
                     <a href="#" className="nav-logo">Job Mailer</a>
                     <ul id="nav-mobile" className="hide-on-med-and-down">
-                        { user.isLoggedIn ? this.isLoggedIn( user ) : (
+                        { this.props.user.isLoggedIn ? this.isLoggedIn( this.props.user ) : (
                             <li><a href="http://localhost:9000/auth/login">Log In</a></li>
                         ) }
                     </ul>
@@ -31,4 +32,11 @@ class Navbar extends Component {
 }
 
 
-export default Navbar;
+const mapStateToProps = ( store ) => {
+    return { 
+        user:  store.user
+    }
+}
+
+
+export default connect( mapStateToProps )( Navbar );

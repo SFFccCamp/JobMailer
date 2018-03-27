@@ -11,7 +11,6 @@ class App extends Component {
 
   constructor( props ) {
     super( props );
-    this.props.store.subscribe(() => this.forceUpdate());
     this.props.store.dispatch( fetchUser() )
   }
 
