@@ -14,14 +14,14 @@ class Navbar extends Component {
 
     render() {
 
-        const user = this.props.store.getState();
+        const { user } = this.props.store.getState();
         return (
             <nav className="grey darken-4 white-text">
                 <div className="nav-wrapper nav-container ">
                     <a href="#" className="nav-logo">Job Mailer</a>
                     <ul id="nav-mobile" className="hide-on-med-and-down">
-                        { user.isLoggedIn ? this.isLoggedIn() : (
-                            <li><a href="sass.html">Log In</a></li>
+                        { user.isLoggedIn ? this.isLoggedIn( user ) : (
+                            <li><a href="http://localhost:9000/auth/login">Log In</a></li>
                         ) }
                     </ul>
                 </div>
