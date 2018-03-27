@@ -3,15 +3,16 @@ import logo from './logo.svg';
 import './App.css';
 import Navbar from './containers/navbar';
 
+
+// ===== ACTIONS ===== //
+import fetchUser from './store/actions/fetchUser'
+
 class App extends Component {
 
-  componentDidMount() {
-    fetch( '/auth/verify', {
-      credentials: 'include'
-    } )
-      .then( res => res.json() )
-      .then( res => console.log( res ) )
-      .catch( err => console.log( err ) )
+  constructor( props ) {
+    super( props );
+    this.props.store.subscribe(() => this.forceUpdate());
+    this.props.store.dispatch( fetchUser() )
   }
 
 
