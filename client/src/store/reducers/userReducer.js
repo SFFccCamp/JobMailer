@@ -3,6 +3,7 @@ import { FETCH_USER } from '../actions/actions';
 
 const initialState = {
     username: '',
+    isLogedIn: false,
     applications: []
 };
 
