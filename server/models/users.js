@@ -4,6 +4,12 @@ const userSchema = mongoose.Schema( {
     username: { type: String, required: true },
     applications: [
         { type: String }
+    ],
+    emails: [
+        { 
+            title  : { type: String, required: true },
+            content: { type: String, required: true }
+        }
     ]
 } );
 
