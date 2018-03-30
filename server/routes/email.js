@@ -29,22 +29,36 @@ router.post( '/', async ( req, res ) => {
             { new: true }
         );
         if( !user ) throw new Error( 'No User Found' );
-         transporter.sendMail( {
-            from: address1,
-            to: address2,
-            subject: title, 
-            text: content
-        }, function( err, response ) {
-            if( err ) console.log( err )
-            console.log( response)
-        } );
-
         res.status( 200 ).json( { status: 'OK' } );
 
     } catch ( error ) {
         res.status( 400 ).json( error );
     }
 } );
+
+
+router.post( '/send', async( req, res ) => {
+    const { id } = req.headers;
+    const { from, to, title, content } = req.body;
+
+    try {
+
+        const user = await Users.findById( id );
+        if( !user ) throw new Error( 'No User Found' );
+
+        await transporter.sendMail( {
+            from,
+            to,
+            subject: title, 
+            text   : content
+        } );
+
+        res.status(200).json( { status: 'OK' } );
+
+    } catch( err ) {
+        res.status(400).json(err);
+    }
+} )
 
 
 module.exports = router;
