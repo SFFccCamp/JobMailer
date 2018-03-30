@@ -27,6 +27,7 @@ app.get( '/test', ( req, res ) => {
 
 
 app.use( '/search', require( './routes/hackerNews' ) );
+app.use( '/email', require( './routes/email' ) );
 app.use( '/auth', require( './routes/authentication') );
 
 
