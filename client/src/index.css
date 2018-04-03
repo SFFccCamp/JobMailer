@@ -4,4 +4,5 @@ body {
   font-family: sans-serif;
 }
 
-@import './styles/navbar.css'
+@import './styles/navbar.css';
+@import './styles/emailForm.css'

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Navbar from './containers/navbar';
+import EmailForm from './containers/EmailForm';
 
 
 // ===== ACTIONS ===== //
@@ -19,6 +20,7 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar store={ this.props.store }/> 
+        <EmailForm store={ this.props.store }/>
       </div>
     );
   }
