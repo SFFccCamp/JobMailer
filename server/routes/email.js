@@ -16,6 +16,12 @@ const transporter = mailer.createTransport( smtpTransport( {
 } ) )
 
 
+/**
+ * Saves user email template
+ * Expects: 
+ *      1) id field from headers
+ *      2) title/content fields from body
+ */
 router.post( '/', async ( req, res ) => {
 
     const { id } = req.headers;
