@@ -26,6 +26,9 @@ router.post( '/', async ( req, res ) => {
 
     const { id } = req.headers;
     const { title, content } = req.body;
+    if( !title || !content ) {
+        return res.status(400).json( { error: 'Missing Fields' } )
+    }
     
     try {
 
