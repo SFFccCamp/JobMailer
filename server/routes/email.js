@@ -16,10 +16,19 @@ const transporter = mailer.createTransport( smtpTransport( {
 } ) )
 
 
+/**
+ * Saves user email template
+ * Expects: 
+ *      1) id field from headers
+ *      2) title/content fields from body
+ */
 router.post( '/', async ( req, res ) => {
 
     const { id } = req.headers;
     const { title, content } = req.body;
+    if( !title || !content ) {
+        return res.status(400).json( { error: 'Missing Fields' } )
+    }
     
     try {
 
