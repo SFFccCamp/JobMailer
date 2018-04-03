@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchData } from '../utilities/fetchHttp';
 
 class EmailForm extends Component {
 
@@ -25,20 +26,16 @@ class EmailForm extends Component {
 
     handleSubmit(e) {
 
-        let id = this.props.user._id; 
         e.preventDefault();
+        let id = this.props.user._id; 
+        let body = {
+          title  : this.state.subject,
+          content: this.state.message
+        }
 
-        fetch('/email', {
-            credentials: 'include',
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json',
-                id
-            },
-            body: JSON.stringify( {
-                updatedCards: newCards
-            } )
-        } )
+        fetchData('/email', 'POST', { id }, body )
+          .then( res => console.log( res ) )
+          .catch( err => console.log( err ) )
     }
 
     render() {
