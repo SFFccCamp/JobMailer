@@ -27,7 +27,7 @@ class Navbar extends Component {
         return (
             <div style={ { display: 'flex' } }>
                 { this.search() }
-                <li><a href="/auth/login">Log In</a></li>                
+                <li><a href="http://localhost:9000/auth/login">Log In</a></li>                
             </div>
         )
     }
@@ -39,7 +39,6 @@ class Navbar extends Component {
                 <div className="nav-wrapper nav-container ">
                     <NavLink to="/" className="nav-logo">Job Mailer</NavLink>
                     <ul id="nav-mobile" className="hide-on-med-and-down">
-                <li><a href="/auth/logout">Log Out</a></li>
                         { this.props.user.isLoggedIn 
                             ? this.isLoggedIn( this.props.user ) 
                             : this.isLoggedOut() }

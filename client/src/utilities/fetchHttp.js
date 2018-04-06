@@ -5,20 +5,18 @@ export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
     for( let key in headerObj ) {
         headers[key] = headerObj[key];
     }
-    
-    return fetch( url, {
-        credentials: 'include',
-        method,
-        headers,
-        body: JSON.stringify(body)
-    } )
-    .then( res => {
-        if (!res.ok) {
-          throw new Error(res.statusText);
-        }
-        return res;
-    } )
-    .then( res => res.json() )
+    let options = method === 'GET'
+                        ? { credentials: 'include', method, headers }
+                        : { credentials: 'include', method, headers, body: JSON.stringify(body) }
+
+    return fetch( url, options )
+        .then( res => {
+            if (!res.ok) {
+              throw new Error(res.statusText);
+            }
+            return res;
+        } )
+        .then( res => res.json() )
 }
 
 
