@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
 
@@ -7,8 +8,13 @@ class Navbar extends Component {
 
         return ( 
             <div>
-                <li><a href="sass.html">{ user.username }</a></li>
-                <li><a href="sass.html">Log Out</a></li>
+                <NavLink to='/study' className="">
+                    { user.userName }
+                </NavLink>
+                <NavLink to='/email' className="">
+                    Email
+                </NavLink>                
+                <li><a href="/auth/logout">Log Out</a></li>
             </div>
         )
     }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import LandingPage  from './components/Landing';
 import Navbar from './containers/navbar';
 import EmailForm from './containers/EmailForm';
 
@@ -18,9 +20,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Navbar store={ this.props.store }/> 
-        <EmailForm store={ this.props.store }/>
+        <div className="App">
+        <Navbar store={ this.props.store }/>
+        <Switch>
+            <Route exact path="/" component={ LandingPage }/>
+            <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
+        </Switch>
       </div>
     );
   }
