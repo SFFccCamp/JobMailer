@@ -46,6 +46,7 @@ class SearchBar extends Component {
                 return Promise.all( subArr.map( kid  => {
                     return fetch( `https://hacker-news.firebaseio.com/v0/item/${kid}.json?print=pretty` )
                             .then( res => res.json() )
+                            .catch( err => err )
                 } ) )
                 .then( data => {
                     let mappedData = data.filter( e => e.text.includes(filter) )
