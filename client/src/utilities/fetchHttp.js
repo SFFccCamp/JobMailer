@@ -1,3 +1,8 @@
+import { Observable } from 'rxjs';
+import { fromPromise } from 'rxjs/Observable';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError } from 'rxjs/operators';
+
 
 export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
 
@@ -9,14 +14,18 @@ export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
                         ? { credentials: 'include', method, headers }
                         : { credentials: 'include', method, headers, body: JSON.stringify(body) }
 
-    return fetch( url, options )
-        .then( res => {
-            if (!res.ok) {
-              throw new Error(res.statusText);
-            }
-            return res;
-        } )
-        .then( res => res.json() )
+    
+    let response = fetch( url, options )
+            .then( res => {
+                if (!res.ok) {
+                  _throw(res.statusText)
+                }
+                return res;
+            } )
+            .then( res => res.json() )
+
+    return Observable.fromPromise( response );
+    
 }
 
 

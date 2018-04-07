@@ -34,8 +34,10 @@ class EmailForm extends Component {
         }
 
         fetchData('/email', 'POST', { id }, body )
-          .then( res => console.log( res ) )
-          .catch( err => console.log( err ) )
+            .subscribe( 
+                res => console.log(res),
+                err => console.log(err) 
+            )
     }
 
     render() {

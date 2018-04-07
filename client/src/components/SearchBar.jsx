@@ -26,8 +26,7 @@ class SearchBar extends Component {
         e.preventDefault();
         const { keywords } = this.state;
         fetchData( '/searchHn/16735011', 'POST', { keywords } )
-            .then( res => console.log(res) )
-            .catch( err => console.log(err) )
+            .subscribe( res => console.log(res) )
     }
 
 

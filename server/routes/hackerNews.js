@@ -37,9 +37,9 @@ router.post( '/:hnId', async ( req, res ) => {
     const { keywords } = req.headers;
     axios.get( `https://hacker-news.firebaseio.com/v0/item/${hnId}.json?print=pretty`)
          .then( result => {
-             const kids = result.data.kids;
-             res.setHeader( 'Content-Type', 'application/json' );
-             handleHttpChunk( res, kids, keywords )
+            const kids = result.data.kids;
+            res.setHeader( 'Content-Type', 'application/json' );
+            handleHttpChunk( res, kids, keywords )
          } )
          .catch( err => console.log(err) )
 } );
