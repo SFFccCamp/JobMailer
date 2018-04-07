@@ -1,4 +1,6 @@
 import { Observable } from 'rxjs';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError } from 'rxjs/operators';
 
 
 export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
@@ -8,7 +10,7 @@ export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
         headers[key] = headerObj[key];
     }
     let options = method === 'GET'
-                        ? { credentials: 'include', method, headers }
+                        ? { method, headers, mode: 'cors' }
                         : { credentials: 'include', method, headers, body: JSON.stringify(body) }
 
 
@@ -21,7 +23,8 @@ export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
                 return res;
             } )
             .then( res => res.json() )
-    } );
+            .then( res => obs.next(res) )
+    } )
     
 }
 

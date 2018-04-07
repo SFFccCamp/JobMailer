@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchData } from '../utilities/fetchHttp';
 import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators'
 
 class SearchBar extends Component {
 
@@ -26,13 +27,17 @@ class SearchBar extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { keywords } = this.state;
-        fetch( `https://hacker-news.firebaseio.com/v0/item/16735011.json?print=pretty`)
-         .then( result => result.json() )
-         .then( result => {
-            const kids = result.kids.splice(0, 120);
-            this.handleHttpStream( kids, 'angular' )
-                .subscribe( res => console.log( res ) )
-         } )
+        
+        return fetchData( `https://cors-anywhere.herokuapp.com/https://hacker-news.firebaseio.com/v0/item/16735011.json?print=pretty`)
+            .switchMap( res => {
+                const kids = res.kids.splice(0, 120);
+                return this.handleHttpStream( kids, keywords )
+            } )
+            .subscribe( 
+                res => console.log(res),
+                err => console.log(err),
+                completed => console.log( 'completed' )
+            )
     }
 
 
