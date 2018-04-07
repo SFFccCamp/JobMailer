@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { fetchData } from '../utilities/fetchHttp';
 import { Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators'
+import { _throw } from 'rxjs/observable/throw';
+import { catchError } from 'rxjs/operators';
 
 class SearchBar extends Component {
 
@@ -29,10 +31,13 @@ class SearchBar extends Component {
         const { keywords } = this.state;
         
         return fetchData( `https://cors-anywhere.herokuapp.com/https://hacker-news.firebaseio.com/v0/item/16735011.json?print=pretty`)
-            .switchMap( res => {
-                const kids = res.kids.splice(0, 120);
-                return this.handleHttpStream( kids, keywords )
-            } )
+            .pipe(
+                switchMap( res => {
+                    const kids = res.kids.splice(0, 120);
+                    return this.handleHttpStream( kids, keywords )
+                } ),
+                catchError( err => _throw(err) )
+            )
             .subscribe( 
                 res => console.log(res),
                 err => console.log(err),
