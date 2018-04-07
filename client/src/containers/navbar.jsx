@@ -1,29 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom';
 
 class Navbar extends Component {
+
+    search = () => <NavLink to='/search'>Search</NavLink>
 
     isLoggedIn = ( user ) => {
 
         return ( 
-            <div>
-                <li><a href="sass.html">{ user.username }</a></li>
-                <li><a href="sass.html">Log Out</a></li>
+            <div style={ { display: 'flex' } }>
+                { this.search() }
+                <NavLink to='/study' className="">
+                    { user.username }
+                </NavLink>
+                <NavLink to='/email' className="">
+                    Email
+                </NavLink>                
+                <li><a href="/auth/logout">Log Out</a></li>
+            </div>
+        )
+    }
+
+    
+    isLoggedOut = () => {
+        return (
+            <div style={ { display: 'flex' } }>
+                { this.search() }
+                <li><a href="http://localhost:9000/auth/login">Log In</a></li>                
             </div>
         )
     }
 
     render() {
 
-        const { user } = this.props.store.getState();
         return (
             <nav className="grey darken-4 white-text">
                 <div className="nav-wrapper nav-container ">
-                    <a href="#" className="nav-logo">Job Mailer</a>
+                    <NavLink to="/" className="nav-logo">Job Mailer</NavLink>
                     <ul id="nav-mobile" className="hide-on-med-and-down">
-                        { this.props.user.isLoggedIn ? this.isLoggedIn( this.props.user ) : (
-                            <li><a href="http://localhost:9000/auth/login">Log In</a></li>
-                        ) }
+                        { this.props.user.isLoggedIn 
+                            ? this.isLoggedIn( this.props.user ) 
+                            : this.isLoggedOut() }
                     </ul>
                 </div>
             </nav>
