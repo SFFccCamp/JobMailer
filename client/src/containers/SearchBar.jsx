@@ -84,15 +84,22 @@ class SearchBar extends Component {
     render() {
         return (
             <div>
+              <div className="row">
                 <form onSubmit={this.handleSubmit}>
-                    <label htmlFor="keyword">Keywords</label>
-                    <input id="keyword"
+                  <div className="input-field col s9">
+                    <label htmlFor="keyword search">Keywords</label>
+                    <input id="keyword search"
                         placeholder="React, Angular, etc."
+                        type="search"
                         onChange={this.handleInput} />
+                  </div>
+                  <div className="col s3">
                     <button type="submit" className="waves-effect waves-light btn">Search</button>
+                  </div>
                 </form>
+              </div>
 
-                <SearchResults results={ this.state.results } />
+              <SearchResults results={ this.state.results } />
             </div>
         );
     }

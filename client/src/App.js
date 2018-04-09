@@ -26,11 +26,13 @@ class App extends Component {
       return (
           <div className="App">
           <Navbar store={ this.props.store }/>
-          <Switch>
-              <Route exact path="/" component={ LandingPage }/>
-              <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
-              <Route exact path="/search" component={ SearchBar }/>            
-          </Switch>
+          <div className="container">
+            <Switch>
+                <Route exact path="/" component={ LandingPage }/>
+                <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
+                <Route exact path="/search" component={ SearchBar }/>
+            </Switch>
+          </div>
         </div>
       );
     }
