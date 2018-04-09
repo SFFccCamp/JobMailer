@@ -5,13 +5,16 @@ import { switchMap } from 'rxjs/operators'
 import { _throw } from 'rxjs/observable/throw';
 import { catchError } from 'rxjs/operators';
 
+import SearchResults from '../components/SearchResults'
+
 class SearchBar extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            keywords: ''
+            keywords: '',
+            results: []
         }
 
         this.handleInput  = this.handleInput.bind(this);
@@ -29,6 +32,9 @@ class SearchBar extends Component {
     handleSubmit(e) {
         e.preventDefault();
         const { keywords } = this.state;
+        this.setState( {
+            results: []
+        } )
         
         return fetchData( `https://cors-anywhere.herokuapp.com/https://hacker-news.firebaseio.com/v0/item/16735011.json?print=pretty`)
             .pipe(
@@ -39,7 +45,14 @@ class SearchBar extends Component {
                 catchError( err => _throw(err) )
             )
             .subscribe( 
-                res => console.log(res),
+                res => {
+                    console.log( res );
+                    if( res.length > 0 ) {
+                        this.setState( {
+                            results: [ ...this.state.results, ...res ]
+                        } )
+                    }
+                },  
                 err => console.log(err),
                 completed => console.log( 'completed' )
             )
@@ -70,13 +83,17 @@ class SearchBar extends Component {
 
     render() {
         return (
-            <form onSubmit={ this.handleSubmit }>
-                <label htmlFor="keyword">Keywords</label>
-                <input id="keyword" 
-                       placeholder="React, Angular, etc."
-                       onChange={ this.handleInput }/>
-                <button type="submit" className="waves-effect waves-light btn">Search</button>
-            </form>
+            <div>
+                <form onSubmit={this.handleSubmit}>
+                    <label htmlFor="keyword">Keywords</label>
+                    <input id="keyword"
+                        placeholder="React, Angular, etc."
+                        onChange={this.handleInput} />
+                    <button type="submit" className="waves-effect waves-light btn">Search</button>
+                </form>
+
+                <SearchResults results={ this.state.results } />
+            </div>
         );
     }
 }

@@ -4,7 +4,7 @@ import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './containers/navbar';
 import LandingPage  from './components/Landing';
-import SearchBar from './components/SearchBar';
+import SearchBar from './containers/SearchBar';
 import EmailForm from './containers/EmailForm';
 
 
