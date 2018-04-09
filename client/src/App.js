@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './containers/navbar';
 import LandingPage  from './components/Landing';
 import SearchBar from './containers/SearchBar';
 import EmailForm from './containers/EmailForm';
-
 
 // ===== ACTIONS ===== //
 import fetchUser from './store/actions/fetchUser'
