@@ -9,15 +9,21 @@ const SearchResults = ( { results } ) => {
         }
 
         return results.map( ( res, i ) => {
-            return <h1 key={ i }>{ res.by }</h1>
-        } )
+          console.log(res.text.match(/([a-zA-Z0-9._+-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi));
+
+          return (
+            <li
+              className="collection-item"
+              key={ i }
+              dangerouslySetInnerHTML={{ __html: res.text }} />
+          );
+        })
     }
 
-
     return (
-        <div>
+        <ul className="collection">
             { allResults(results) }
-        </div>
+        </ul>
     );
 };
 

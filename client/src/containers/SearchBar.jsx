@@ -18,7 +18,7 @@ class SearchBar extends Component {
         }
 
         this.handleInput  = this.handleInput.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this); 
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 
@@ -35,7 +35,7 @@ class SearchBar extends Component {
         this.setState( {
             results: []
         } )
-        
+
         return fetchData( `https://cors-anywhere.herokuapp.com/https://hacker-news.firebaseio.com/v0/item/16735011.json?print=pretty`)
             .pipe(
                 switchMap( res => {
@@ -44,7 +44,7 @@ class SearchBar extends Component {
                 } ),
                 catchError( err => _throw(err) )
             )
-            .subscribe( 
+            .subscribe(
                 res => {
                     console.log( res );
                     if( res.length > 0 ) {
@@ -52,7 +52,7 @@ class SearchBar extends Component {
                             results: [ ...this.state.results, ...res ]
                         } )
                     }
-                },  
+                },
                 err => console.log(err),
                 completed => console.log( 'completed' )
             )
@@ -62,7 +62,7 @@ class SearchBar extends Component {
     handleHttpStream( array, filter ) {
 
         return new Observable( obs => {
-            
+
             ( function handleChunk( array, filter ) {
                 if( array.length === 0 ) return obs.complete()
                 let subArr = array.splice( 0, 20 );
