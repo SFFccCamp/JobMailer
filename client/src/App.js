@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './containers/navbar';
 import LandingPage  from './components/Landing';
 import SearchBar from './containers/SearchBar';
 import EmailForm from './containers/EmailForm';
-
 
 // ===== ACTIONS ===== //
 import fetchUser from './store/actions/fetchUser'
@@ -28,11 +26,13 @@ class App extends Component {
       return (
           <div className="App">
           <Navbar store={ this.props.store }/>
-          <Switch>
-              <Route exact path="/" component={ LandingPage }/>
-              <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
-              <Route exact path="/search" component={ SearchBar }/>            
-          </Switch>
+          <div className="container">
+            <Switch>
+                <Route exact path="/" component={ LandingPage }/>
+                <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
+                <Route exact path="/search" component={ SearchBar }/>
+            </Switch>
+          </div>
         </div>
       );
     }
