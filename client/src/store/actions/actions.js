@@ -1,1 +1,3 @@
-export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USER        = 'FETCH_USER';
+export const FETCH_APPLICATION = 'FETCH_APPLICATION';
+export const ADD_APPLICATION   = 'ADD_APPLICATION';

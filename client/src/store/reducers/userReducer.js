@@ -1,10 +1,10 @@
-import { FETCH_USER } from '../actions/actions';
+import { FETCH_USER, FETCH_APPLICATION, ADD_APPLICATION } from '../actions/actions';
 
 
 const initialState = {
     username: "",
     _id: "", 
-    applications: '',
+    applications: [],
     isLoggedIn: false
 };
 
@@ -17,8 +17,22 @@ const userReducer = ( state = initialState, action ) => {
                 ...state,
                 ...action.payload
             }
+        
+        case FETCH_APPLICATION:
+            const applications = [ ...state.applications, ...action.payload ];
+            return {
+                ...state,
+                ...{ applications }
+            }
 
-
+        case ADD_APPLICATION:
+            const newApps = [ ...state.applications ];
+            newApps.push( action.payload );
+            return {
+                ...state,
+                ...{ applications: newApps }
+            }
+            
         default: 
             return state;
     }

@@ -5,6 +5,7 @@ import Navbar from './containers/navbar';
 import LandingPage  from './components/Landing';
 import SearchBar from './containers/SearchBar';
 import EmailForm from './containers/EmailForm';
+import Applications from './containers/Applications';
 
 // ===== ACTIONS ===== //
 import fetchUser from './store/actions/fetchUser'
@@ -25,12 +26,13 @@ class App extends Component {
     render() {
       return (
           <div className="App">
-          <Navbar store={ this.props.store }/>
+          <Navbar />
           <div className="container">
             <Switch>
                 <Route exact path="/" component={ LandingPage }/>
-                <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
+                <Route exact path="/email" component={ EmailForm }/>
                 <Route exact path="/search" component={ SearchBar }/>
+                <Route exact path="/applications" component={ Applications }/>                
             </Switch>
           </div>
         </div>

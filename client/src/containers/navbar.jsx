@@ -14,10 +14,13 @@ class Navbar extends Component {
                 <NavLink to='/study' className="">
                     { user.username }
                 </NavLink>
+                <NavLink to='/applications' className="">
+                    Applications
+                </NavLink> 
                 <NavLink to='/email' className="">
                     Email
                 </NavLink>                
-                <li><a href="/auth/logout">Log Out</a></li>
+                <li><a href="http://localhost:9000/auth/logout">Log Out</a></li>
             </div>
         )
     }
