@@ -21,7 +21,7 @@ router.get( '/verify', ( req, res ) => {
     if( !req.user ) {
         res.status(400).json( { error: 'No User Found'} )
     } else {
-        res.status(200).json( { username: req.user.username, _id: req.user._id, applications: req.user.applications } );
+        res.status(200).json( { username: req.user.username, _id: req.user._id } );
     }
 } )
 
