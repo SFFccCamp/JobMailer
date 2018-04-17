@@ -5,6 +5,7 @@ import Navbar from './containers/navbar';
 import LandingPage  from './components/Landing';
 import SearchBar from './containers/SearchBar';
 import EmailForm from './containers/EmailForm';
+import Applications from './containers/Applications';
 
 // ===== ACTIONS ===== //
 import fetchUser from './store/actions/fetchUser'
@@ -31,6 +32,7 @@ class App extends Component {
                 <Route exact path="/" component={ LandingPage }/>
                 <Route exact path="/email" render={ () => <EmailForm store={ this.props.store } />}/>
                 <Route exact path="/search" component={ SearchBar }/>
+                <Route exact path="/applications" render={ () => <Applications store={ this.props.store } /> }/>                
             </Switch>
           </div>
         </div>
