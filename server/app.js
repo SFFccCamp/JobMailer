@@ -31,6 +31,7 @@ app.get( '/test', ( req, res ) => {
 app.use( '/searchHn', require( './routes/hackerNews' ) );
 app.use( '/email', require( './routes/email' ) );
 app.use( '/auth', require( './routes/authentication') );
+app.use( '/applications', require( './routes/application' ) );
 
 
 app.listen( port );
