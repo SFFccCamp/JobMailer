@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchData } from '../utilities/fetchHttp';
 
-import { ADD_APPLICATION } from '../store/actions/actions';
+import { FETCH_APPLICATION, ADD_APPLICATION } from '../store/actions/actions';
+
 
 function mapStateToProps( state ) {
     return {
@@ -11,8 +12,15 @@ function mapStateToProps( state ) {
     };
 }
 
+
 function mapDispatchToProps( dispatch ) {
     return {
+        fetchApps: ( payload ) => {
+            dispatch( {
+                type: FETCH_APPLICATION,
+                payload
+            } )
+        },
         addApp: ( payload ) => {
             dispatch( {
                 type: ADD_APPLICATION,
@@ -28,13 +36,19 @@ class Applications extends Component {
         applicationName: ''
     }
 
-    
-    hasApplications = this.props.applications.length > 0;
+
+    componentDidMount() {
+        fetchData( '/applications', 'GET' )
+            .subscribe( 
+                res => this.props.fetchApps( res.apps ),
+                err => console.log( err ) 
+        )
+    }
 
 
     renderApplications = () => {
         return this.props.applications.map( ( app, i ) => {
-            return <div key={ app + i }>{ app }</div>
+            return <div key={ app.name + i }>{ app.name }</div>
         } );
     }
 
@@ -63,7 +77,7 @@ class Applications extends Component {
         const  name   = this.state.applicationName
         fetchData( '/applications', 'POST', { id: _id, name }, {} )
             .subscribe( res => {
-                this.props.addApp( name )
+                this.props.addApp( res.newApp )
             } )
     }
 
@@ -73,7 +87,8 @@ class Applications extends Component {
             <div>
                 { this.props.applications.length > 0 
                     ? this.renderApplications() 
-                    : this.addApps() }
+                    : <h1>No Applications</h1> }
+                { this.addApps() }
             </div>
         );
     }

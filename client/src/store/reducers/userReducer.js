@@ -1,4 +1,4 @@
-import { FETCH_USER, ADD_APPLICATION } from '../actions/actions';
+import { FETCH_USER, FETCH_APPLICATION, ADD_APPLICATION } from '../actions/actions';
 
 
 const initialState = {
@@ -16,6 +16,13 @@ const userReducer = ( state = initialState, action ) => {
             return {
                 ...state,
                 ...action.payload
+            }
+        
+        case FETCH_APPLICATION:
+            const applications = [ ...state.applications, ...action.payload ];
+            return {
+                ...state,
+                ...{ applications }
             }
 
         case ADD_APPLICATION:

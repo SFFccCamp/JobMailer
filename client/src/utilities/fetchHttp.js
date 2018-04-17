@@ -10,7 +10,7 @@ export const fetchData = ( url, method = 'GET', headerObj = {}, body = {} ) => {
         headers[key] = headerObj[key];
     }
     let options = method === 'GET'
-                        ? { method, headers, mode: 'cors' }
+                        ? { method, headers, mode: 'cors', credentials: 'include' }
                         : { credentials: 'include', method, headers, body: JSON.stringify(body) }
 
 
