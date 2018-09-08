@@ -1,4 +1,4 @@
-import { FETCH_USER, FETCH_APPLICATION, ADD_APPLICATION } from '../actions/actions';
+import { FETCH_USER, RESET_USER, FETCH_APPLICATION, ADD_APPLICATION } from '../actions/actions';
 
 
 const initialState = {
@@ -12,6 +12,10 @@ const initialState = {
 const userReducer = ( state = initialState, action ) => {
 
     switch( action.type ) {
+
+        case RESET_USER:
+            return initialState;
+
         case FETCH_USER: 
             return {
                 ...state,
@@ -36,6 +40,7 @@ const userReducer = ( state = initialState, action ) => {
         default: 
             return state;
     }
+    
 }
 
 

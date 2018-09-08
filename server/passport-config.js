@@ -7,7 +7,6 @@ const express       = require( 'express' );
 const router        = express.Router();
 const Users         = require( './models/users' );
 
-
 const strategy = new Auth0Strategy( {
   domain      :  process.env.authDomain,
   clientID    :  process.env.authId, 

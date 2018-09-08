@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Navbar from './containers/navbar';
 import LandingPage  from './components/Landing';
 import SearchBar from './containers/SearchBar';
@@ -8,13 +8,13 @@ import EmailForm from './containers/EmailForm';
 import Applications from './containers/Applications';
 
 // ===== ACTIONS ===== //
-import fetchUser from './store/actions/fetchUser'
+import { GET_USER } from './store/actions/actions'
 
 class App extends Component {
 
     constructor( props ) {
         super( props );
-        this.props.store.dispatch( fetchUser() )
+        this.props.store.dispatch( { type: GET_USER} )
     }
 
 
